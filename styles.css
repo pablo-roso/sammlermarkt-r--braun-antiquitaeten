@@ -1,0 +1,574 @@
+/* ==========================================================================
+   Sammlermarkt R. Braun Antiquitäten — Website-Entwurf
+   Edle, klassische Ästhetik: Creme/Elfenbein, Dunkelgrün, Bordeaux, Gold.
+   ========================================================================== */
+
+:root{
+  --cream:        #f7f1e4;
+  --cream-alt:     #f0e8d6;
+  --ivory:        #fbf8f0;
+  --ink:          #2a241c;
+  --ink-soft:     #5a5142;
+
+  --green:        #1f3d2e;
+  --green-deep:   #16291f;
+  --bordeaux:     #6e1f2b;
+  --bordeaux-deep:#511620;
+  --gold:         #b8935a;
+  --gold-bright:  #cba766;
+
+  --border-soft:  rgba(42,36,28,0.14);
+  --shadow-soft:  0 10px 30px rgba(22,20,15,0.10);
+
+  --font-head: "Playfair Display", "Georgia", serif;
+  --font-body: "EB Garamond", "Iowan Old Style", Georgia, serif;
+
+  color-scheme: light;
+}
+
+*, *::before, *::after{ box-sizing: border-box; }
+
+html{
+  scroll-behavior: smooth;
+}
+
+body{
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.08rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+img{ max-width: 100%; display: block; }
+
+h1, h2, h3{
+  font-family: var(--font-head);
+  color: var(--green);
+  margin: 0 0 0.5em;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+a{ color: inherit; }
+
+.sr-only{
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link{
+  position: absolute;
+  left: -999px;
+  top: 0;
+  background: var(--green);
+  color: var(--ivory);
+  padding: 0.8em 1.2em;
+  z-index: 200;
+  border-radius: 0 0 6px 0;
+}
+.skip-link:focus{
+  left: 0;
+}
+
+/* ---------- Buttons ---------- */
+.btn{
+  display: inline-block;
+  padding: 0.85em 1.8em;
+  border-radius: 2px;
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+}
+.btn:hover{ transform: translateY(-1px); }
+
+.btn-primary{
+  background: var(--bordeaux);
+  color: var(--ivory);
+  border-color: var(--bordeaux);
+}
+.btn-primary:hover{
+  background: var(--bordeaux-deep);
+  border-color: var(--bordeaux-deep);
+}
+
+.btn-outline{
+  background: transparent;
+  color: var(--green);
+  border-color: var(--green);
+}
+.btn-outline:hover{
+  background: var(--green);
+  color: var(--ivory);
+}
+
+/* ---------- Header ---------- */
+.site-header{
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(247,241,228,0.94);
+  backdrop-filter: saturate(140%) blur(6px);
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.header-inner{
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0.7em 1.5em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5em;
+  position: relative;
+}
+
+.brand{
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  text-decoration: none;
+  color: var(--green);
+}
+.brand-mark{ color: var(--gold); display: inline-flex; }
+.brand-text{ display: flex; flex-direction: column; line-height: 1.1; }
+.brand-name{
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 1.3rem;
+  letter-spacing: 0.02em;
+}
+.brand-sub{
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--bordeaux);
+}
+
+.main-nav{
+  display: flex;
+  gap: 1.8em;
+  flex-wrap: wrap;
+}
+.main-nav a{
+  text-decoration: none;
+  font-size: 0.95rem;
+  letter-spacing: 0.03em;
+  color: var(--ink);
+  padding: 0.3em 0;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.main-nav a:hover,
+.main-nav a:focus-visible{
+  color: var(--bordeaux);
+  border-bottom-color: var(--gold);
+}
+
+.nav-toggle{
+  display: none;
+  background: none;
+  border: 1px solid var(--border-soft);
+  border-radius: 4px;
+  width: 42px;
+  height: 38px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.burger,
+.burger::before,
+.burger::after{
+  content: "";
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: var(--green);
+  position: relative;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+.burger::before{ position: absolute; top: -6px; }
+.burger::after{ position: absolute; top: 6px; }
+
+/* ---------- Hero ---------- */
+.hero{
+  position: relative;
+  overflow: hidden;
+  color: var(--ivory);
+  background: linear-gradient(160deg, var(--green) 0%, var(--green-deep) 55%, #0f1d15 100%);
+  padding: 7.5em 1.5em 6em;
+  text-align: center;
+}
+
+.hero-pattern{
+  position: absolute;
+  inset: 0;
+  opacity: 0.5;
+  background-image:
+    radial-gradient(circle at 15% 20%, rgba(184,147,90,0.16) 0, transparent 40%),
+    radial-gradient(circle at 85% 15%, rgba(184,147,90,0.12) 0, transparent 35%),
+    repeating-linear-gradient(45deg, rgba(255,255,255,0.025) 0 2px, transparent 2px 26px),
+    repeating-linear-gradient(-45deg, rgba(255,255,255,0.025) 0 2px, transparent 2px 26px);
+  pointer-events: none;
+}
+
+.hero-inner{
+  position: relative;
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.eyebrow{
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: 0.78rem;
+  color: var(--gold-bright);
+  margin: 0 0 1.2em;
+}
+
+.hero h1{
+  color: var(--ivory);
+  font-size: clamp(2.1rem, 5vw, 3.4rem);
+  line-height: 1.15;
+  margin-bottom: 0.55em;
+}
+
+.hero-claim{
+  font-size: 1.2rem;
+  color: rgba(251,248,240,0.88);
+  max-width: 560px;
+  margin: 0 auto 2em;
+}
+
+.hero-actions{
+  display: flex;
+  gap: 1em;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.hero .btn-outline{
+  color: var(--ivory);
+  border-color: rgba(251,248,240,0.6);
+}
+.hero .btn-outline:hover{
+  background: var(--ivory);
+  color: var(--green-deep);
+}
+
+/* ---------- Sections ---------- */
+.section{
+  padding: 5.5em 1.5em;
+}
+.section-alt{
+  background: var(--cream-alt);
+}
+
+.section-inner{
+  max-width: 1180px;
+  margin: 0 auto;
+}
+.section-inner.narrow{
+  max-width: 760px;
+}
+
+.kicker{
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.78rem;
+  color: var(--bordeaux);
+  margin: 0 0 0.6em;
+  text-align: center;
+}
+.section-inner.narrow .kicker{ text-align: left; }
+
+.section > .section-inner > h2{
+  text-align: center;
+  font-size: clamp(1.6rem, 3.4vw, 2.2rem);
+}
+.section-inner.narrow h2{ text-align: left; }
+
+.lead{
+  max-width: 680px;
+  color: var(--ink-soft);
+}
+.lead-center{
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+.section-inner.narrow .lead{ max-width: none; }
+
+/* ---------- Karten (Sortiment) ---------- */
+.card-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1.6em;
+  margin: 3em 0 3em;
+}
+
+.card{
+  background: var(--ivory);
+  border: 1px solid var(--border-soft);
+  border-top: 3px solid var(--gold);
+  border-radius: 4px;
+  padding: 2em 1.6em;
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card:hover{
+  transform: translateY(-3px);
+  box-shadow: 0 16px 34px rgba(22,20,15,0.14);
+}
+
+.card-icon{
+  display: inline-flex;
+  color: var(--bordeaux);
+  margin-bottom: 0.7em;
+}
+
+.card h3{
+  font-size: 1.15rem;
+  margin-bottom: 0.4em;
+}
+
+.card p{
+  color: var(--ink-soft);
+  font-size: 0.98rem;
+  margin: 0;
+}
+
+.notice{
+  background: var(--green);
+  color: var(--ivory);
+  border-radius: 4px;
+  padding: 2.2em 2.4em;
+  text-align: center;
+  max-width: 780px;
+  margin: 0 auto;
+}
+.notice h3{
+  color: var(--gold-bright);
+  font-size: 1.25rem;
+}
+.notice p{
+  color: rgba(251,248,240,0.9);
+  margin: 0;
+  max-width: 620px;
+  margin-inline: auto;
+}
+
+/* ---------- Galerie ---------- */
+.gallery-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.2em;
+  margin-top: 3em;
+}
+
+.gallery-tile{
+  margin: 0;
+  aspect-ratio: 1 / 1;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8em;
+  color: var(--ivory);
+  text-align: center;
+  padding: 1em;
+  box-shadow: var(--shadow-soft);
+}
+
+.gallery-tile figcaption{
+  font-family: var(--font-head);
+  font-size: 0.98rem;
+  letter-spacing: 0.02em;
+}
+
+.tile-green{ background: linear-gradient(150deg, #24503c, #16291f); }
+.tile-bordeaux{ background: linear-gradient(150deg, #7c2a37, #4c1219); }
+.tile-gold{ background: linear-gradient(150deg, #c9a34e, #93712f); color: var(--ink); }
+.tile-cream{ background: linear-gradient(150deg, var(--ivory), var(--cream-alt)); color: var(--green); border: 1px solid var(--border-soft); box-shadow: none; }
+
+/* ---------- Öffnungszeiten ---------- */
+.hours-table{
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.6em 0;
+  font-size: 1.05rem;
+}
+.hours-table tr{
+  border-bottom: 1px solid var(--border-soft);
+}
+.hours-table th,
+.hours-table td{
+  text-align: left;
+  padding: 0.9em 0.2em;
+  font-weight: 400;
+}
+.hours-table th{
+  color: var(--green);
+  font-family: var(--font-head);
+  font-weight: 600;
+  width: 45%;
+}
+.hours-note{
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+
+/* ---------- Kontakt ---------- */
+.contact-grid{
+  display: grid;
+  grid-template-columns: minmax(240px, 1fr) minmax(280px, 1.3fr);
+  gap: 3em;
+  align-items: start;
+  margin-top: 2.5em;
+}
+
+.contact-info address{
+  font-style: normal;
+  font-size: 1.15rem;
+  color: var(--ink);
+  margin-bottom: 1.4em;
+  line-height: 1.7;
+}
+.contact-info address a{
+  color: var(--bordeaux);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(110,31,43,0.35);
+}
+.contact-info address a:hover{
+  border-bottom-color: var(--bordeaux);
+}
+
+.route-btn{ margin-bottom: 1.4em; }
+
+.contact-hint{
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  max-width: 400px;
+}
+
+.contact-form{
+  background: var(--ivory);
+  border: 1px solid var(--border-soft);
+  border-radius: 4px;
+  padding: 2em;
+  box-shadow: var(--shadow-soft);
+}
+
+.form-row{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.2em;
+}
+.form-row label{
+  font-size: 0.85rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 0.45em;
+}
+.form-row input,
+.form-row select,
+.form-row textarea{
+  font-family: var(--font-body);
+  font-size: 1rem;
+  padding: 0.6em 0.7em;
+  border: 1px solid var(--border-soft);
+  border-radius: 3px;
+  background: var(--cream);
+  color: var(--ink);
+  resize: vertical;
+}
+.form-row input:focus,
+.form-row select:focus,
+.form-row textarea:focus{
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(184,147,90,0.25);
+}
+
+.form-note{
+  margin: 1.1em 0 0;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  font-style: italic;
+}
+.form-note.is-sent{
+  color: var(--bordeaux);
+  font-style: normal;
+  font-weight: 600;
+}
+
+/* ---------- Footer ---------- */
+.site-footer{
+  background: var(--green-deep);
+  color: rgba(251,248,240,0.82);
+  text-align: center;
+  padding: 2.2em 1.5em;
+  font-size: 0.9rem;
+}
+.site-footer p{ margin: 0.3em 0; }
+.footer-disclaimer{
+  color: rgba(251,248,240,0.55);
+  font-size: 0.82rem;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 860px){
+  .contact-grid{
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px){
+  .nav-toggle{
+    display: inline-flex;
+  }
+  .main-nav{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--ivory);
+    border-bottom: 1px solid var(--border-soft);
+    flex-direction: column;
+    gap: 0;
+    padding: 0.5em 1.5em 1em;
+    box-shadow: var(--shadow-soft);
+    display: none;
+  }
+  .main-nav.is-open{
+    display: flex;
+  }
+  .main-nav a{
+    padding: 0.7em 0;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .main-nav a:hover,
+  .main-nav a:focus-visible{
+    border-bottom-color: var(--border-soft);
+  }
+  .hero{ padding: 6em 1.2em 4.5em; }
+  .section{ padding: 4em 1.2em; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior: auto; }
+  .btn, .card, .burger, .burger::before, .burger::after{ transition: none; }
+}
